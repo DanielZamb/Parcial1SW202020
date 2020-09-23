@@ -13,6 +13,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -31,5 +32,21 @@ public class SeriePersistence {
         Query q = em.createQuery("select u from SerieEntity u");
         return q.getResultList();
     }
-    
+    public SerieEntity findSerie(Long serieID){
+        LOGGER.log(Level.INFO,"Consultando la serie con id={0} y mascota con id = "+serieID);
+        String queryString = "SELECT s FROM SerieEntity s WHERE s.id = :serieID)";
+        TypedQuery query= em.createQuery(queryString, SerieEntity.class);
+        query.setParameter("serieID", serieID);
+        List<SerieEntity> list = query.getResultList();
+        SerieEntity result;
+        if (list == null|| list.isEmpty()) result = null;
+        else result = list.get(0);
+        return result;
+    }
+    public SerieEntity create(SerieEntity serie){
+        LOGGER.log(Level.INFO,"Creando una serie nueva");
+        em.persist(serie);
+        LOGGER.log(Level.INFO,"Factura creada");
+        return serie;
+    }
 }

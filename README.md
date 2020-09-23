@@ -9,4 +9,3 @@
 - Ejecute en postman una solicitud GET a la url localhost:8080/s4_parcial1-api/api/series
 
 Ya en correcta ejecución su aplicación comience con el examen que el profesor le brindará durante la llamada.
-link repo: https://github.com/DanielZamb/Parcial1SW202020

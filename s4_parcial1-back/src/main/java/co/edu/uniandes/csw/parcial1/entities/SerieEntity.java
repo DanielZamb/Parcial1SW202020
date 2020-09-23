@@ -5,7 +5,13 @@
  */
 package co.edu.uniandes.csw.parcial1.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -19,9 +25,22 @@ public class SerieEntity extends BaseEntity {
     private String category;
     private Float rating;
     private Integer releaseYear;
+    
+    @PodamExclude
+    @OneToMany(mappedBy="serie", cascade = CascadeType.ALL)
+    private List<CapituloEntity> capitulos = new ArrayList<>();
 
     public SerieEntity() {
     }
+
+    public List<CapituloEntity> getCapitulos() {
+        return capitulos;
+    }
+
+    public void setCapitulos(List<CapituloEntity> capitulos) {
+        this.capitulos = capitulos;
+    }
+    
 
     public String getName() {
         return name;
